@@ -7,7 +7,7 @@ base = pd.read_csv("census.csv")
 previsores = base.iloc[:, 0:14].values
 classe = base.iloc[:, 14].values
 
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 labelencoder_previsores = LabelEncoder()
 #labels = labelencoder_previsores.fit_transform(previsores[:,1])
 previsores[:, 1] = labelencoder_previsores.fit_transform(previsores[:,1])
@@ -18,3 +18,6 @@ previsores[:, 7] = labelencoder_previsores.fit_transform(previsores[:,7])
 previsores[:, 8] = labelencoder_previsores.fit_transform(previsores[:,8])
 previsores[:, 9] = labelencoder_previsores.fit_transform(previsores[:,9])
 previsores[:, 13] = labelencoder_previsores.fit_transform(previsores[:,13])
+
+onehotencoder = OneHotEncoder(categorical_features=[1,3,5,6,7,8,9,13])
+previsores = onehotencoder.fit_transform(previsores).toarray()
